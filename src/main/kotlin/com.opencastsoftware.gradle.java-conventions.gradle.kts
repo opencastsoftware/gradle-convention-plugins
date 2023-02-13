@@ -39,6 +39,12 @@ mavenPublishing {
     description = project.description
     publishToMavenCentral(SonatypeHost.S01, true)
     signAllPublications()
+    pom {
+        organization {
+            name.set("Opencast Software Europe Ltd")
+            url.set("https://opencastsoftware.com")
+        }
+    }
 }
 
 tasks.withType<JavaCompile> {

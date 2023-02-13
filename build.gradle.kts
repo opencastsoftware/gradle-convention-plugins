@@ -63,12 +63,27 @@ mavenPublishing {
                 distribution.set("repo")
             }
         }
+        organization {
+            name.set("Opencast Software Europe Ltd")
+            url.set("https://opencastsoftware.com")
+        }
         developers {
             developer {
                 id.set("DavidGregory084")
                 name.set("David Gregory")
+                organization.set("Opencast Software Europe Ltd")
+                organizationUrl.set("https://opencastsoftware.com/")
+                timezone.set("Europe/London")
                 url.set("https://github.com/DavidGregory084")
             }
+        }
+        ciManagement {
+            system.set("Github Actions")
+            url.set("https://github.com/opencastsoftware/gradle-convention-plugins/actions")
+        }
+        issueManagement {
+            system.set("GitHub")
+            url.set("https://github.com/opencastsoftware/gradle-convention-plugins/issues")
         }
         scm {
             connection.set("scm:git:https://github.com/opencastsoftware/gradle-convention-plugins.git")
