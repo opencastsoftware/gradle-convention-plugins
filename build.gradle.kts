@@ -1,5 +1,5 @@
 import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.JavaLibrary
+import com.vanniktech.maven.publish.GradlePlugin
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
@@ -51,7 +51,7 @@ mavenPublishing {
     description = project.description
     publishToMavenCentral(SonatypeHost.S01, true)
     signAllPublications()
-    configure(JavaLibrary(JavadocJar.Empty()))
+    configure(GradlePlugin(javadocJar = JavadocJar.Empty(), sourcesJar = true))
     pomFromGradleProperties()
     pom {
         description.set(project.description)
