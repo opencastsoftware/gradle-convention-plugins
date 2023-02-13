@@ -54,7 +54,9 @@ mavenPublishing {
     configure(GradlePlugin(javadocJar = JavadocJar.Empty(), sourcesJar = true))
     pomFromGradleProperties()
     pom {
+        name.set("gradle-convention-plugins")
         description.set(project.description)
+        url.set("https://github.com/opencastsoftware/gradle-convention-plugins")
         inceptionYear.set("2023")
         licenses {
             license {
