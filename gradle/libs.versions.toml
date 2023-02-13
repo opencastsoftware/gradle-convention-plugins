@@ -1,0 +1,18 @@
+[versions]
+gradleMavenPublish = "0.24.0"
+gradleGitVersioning = "6.3.8"
+gradleVersions = "0.45.0"
+jacoco = "0.8.8"
+junit = "5.9.2"
+
+[libraries]
+gradleMavenPublishPlugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "gradleMavenPublish" }
+gradleGitVersioningPlugin = { module = "me.qoomon:gradle-git-versioning-plugin", version.ref = "gradleGitVersioning" }
+gradleVersionsPlugin = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "gradleVersions" }
+junitJupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+
+[plugins]
+gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersions" }
+gradleGitVersioning = { id = "me.qoomon.git-versioning", version.ref = "gradleGitVersioning" }
+gradleMavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "gradleMavenPublish" }
+gradleMavenPublishBase = { id = "com.vanniktech.maven.publish.base", version.ref = "gradleMavenPublish" }
