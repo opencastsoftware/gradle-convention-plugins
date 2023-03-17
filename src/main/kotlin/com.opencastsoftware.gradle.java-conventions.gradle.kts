@@ -61,16 +61,6 @@ spotless {
     kotlinGradle {
         encoding("UTF-8")
         target("**/*.gradle.kts")
-        licenseHeader(
-            """
-            /*
-             * SPDX-FileCopyrightText:  Copyright ${"$"}YEAR Opencast Software Europe Ltd
-             * SPDX-License-Identifier: Apache-2.0
-             */
-             """
-                .trimIndent(),
-            "^"
-        )
         ktfmt().kotlinlangStyle()
         indentWithSpaces()
         trimTrailingWhitespace()
