@@ -69,7 +69,7 @@ spotless {
              */
              """
                 .trimIndent(),
-            "plugins {"
+            "^"
         )
         ktfmt().kotlinlangStyle()
         indentWithSpaces()
