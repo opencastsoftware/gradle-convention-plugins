@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText:  Copyright 2023 Opencast Software Europe Ltd
+ * SPDX-FileCopyrightText:  © 2023 Opencast Software Europe Ltd <https://opencastsoftware.com>
  * SPDX-License-Identifier: Apache-2.0
  */
 import com.vanniktech.maven.publish.SonatypeHost
@@ -45,7 +45,7 @@ spotless {
         licenseHeader(
             """
             /*
-             * SPDX-FileCopyrightText:  Copyright ${"$"}YEAR Opencast Software Europe Ltd
+             * SPDX-FileCopyrightText:  © ${"$"}YEAR Opencast Software Europe Ltd <https://opencastsoftware.com>
              * SPDX-License-Identifier: Apache-2.0
              */
             """
