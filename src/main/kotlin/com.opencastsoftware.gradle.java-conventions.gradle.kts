@@ -1,3 +1,7 @@
+/*
+ * SPDX-FileCopyrightText:  Copyright 2023 Opencast Software Europe Ltd
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.accessors.dm.LibrariesForLibs
 
@@ -11,11 +15,10 @@ plugins {
     id("com.github.ben-manes.versions")
     id("me.qoomon.git-versioning")
     id("com.vanniktech.maven.publish")
+    id("com.diffplug.spotless")
 }
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 version = "0.0.0-SNAPSHOT"
 
@@ -23,15 +26,55 @@ gitVersioning.apply {
     refs {
         branch(".+") {
             describeTagPattern = "v(?<version>.*)"
-            version = "\${describe.tag.version:-0.0.0}-\${describe.distance}-\${commit.short}-SNAPSHOT"
+            version =
+                "\${describe.tag.version:-0.0.0}-\${describe.distance}-\${commit.short}-SNAPSHOT"
         }
-        tag("v(?<version>.*)") {
-            version = "\${ref.version}"
-        }
+        tag("v(?<version>.*)") { version = "\${ref.version}" }
     }
     rev {
         describeTagPattern = "v(?<version>.*)"
         version = "\${describe.tag.version:-0.0.0}-\${describe.distance}-\${commit.short}-SNAPSHOT"
+    }
+}
+
+spotless {
+    ratchetFrom("origin/main")
+
+    java {
+        encoding("UTF-8")
+        licenseHeader(
+            """
+            /*
+             * SPDX-FileCopyrightText:  Copyright ${"$"}YEAR Opencast Software Europe Ltd
+             * SPDX-License-Identifier: Apache-2.0
+             */
+            """
+                .trimIndent()
+        )
+        removeUnusedImports()
+        importOrder("", "javax", "java", "\\#")
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    kotlinGradle {
+        encoding("UTF-8")
+        target("**/*.gradle.kts")
+        licenseHeader(
+            """
+            /*
+             * SPDX-FileCopyrightText:  Copyright ${"$"}YEAR Opencast Software Europe Ltd
+             * SPDX-License-Identifier: Apache-2.0
+             */
+             """
+                .trimIndent(),
+            "plugins {"
+        )
+        ktfmt().kotlinlangStyle()
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
     }
 }
 
@@ -47,24 +90,12 @@ mavenPublishing {
     }
 }
 
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-}
+tasks.withType<JavaCompile> { options.encoding = "UTF-8" }
 
-tasks.named<Test>("test") {
-    useJUnitPlatform()
-}
+tasks.named<Test>("test") { useJUnitPlatform() }
 
-jacoco {
-    toolVersion = libs.versions.jacoco.get()
-}
+jacoco { toolVersion = libs.versions.jacoco.get() }
 
-tasks.test {
-    finalizedBy(tasks.jacocoTestReport)
-}
+tasks.test { finalizedBy(tasks.jacocoTestReport) }
 
-tasks.jacocoTestReport {
-    reports {
-        xml.required.set(true)
-    }
-}
+tasks.jacocoTestReport { reports { xml.required.set(true) } }

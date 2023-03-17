@@ -1,5 +1,9 @@
-import com.vanniktech.maven.publish.JavadocJar
+/*
+ * SPDX-FileCopyrightText:  Copyright 2023 Opencast Software Europe Ltd
+ * SPDX-License-Identifier: Apache-2.0
+ */
 import com.vanniktech.maven.publish.GradlePlugin
+import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
@@ -8,6 +12,7 @@ plugins {
     alias(libs.plugins.gradleVersions)
     alias(libs.plugins.gradleGitVersioning)
     alias(libs.plugins.gradleMavenPublishBase)
+    alias(libs.plugins.spotlessGradle)
 }
 
 repositories {
@@ -16,34 +21,57 @@ repositories {
 }
 
 group = "com.opencastsoftware.gradle"
+
 description = "Convention plugins for Gradle builds at Opencast"
+
 version = "0.0.0-SNAPSHOT"
 
 dependencies {
     implementation(libs.gradleVersionsPlugin)
     implementation(libs.gradleGitVersioningPlugin)
     implementation(libs.gradleMavenPublishPlugin)
+    implementation(libs.spotlessGradlePlugin)
     // Workaround for https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(11))
-}
+java { toolchain.languageVersion.set(JavaLanguageVersion.of(11)) }
 
 gitVersioning.apply {
     refs {
         branch(".+") {
             describeTagPattern = "v(?<version>.*)"
-            version = "\${describe.tag.version:-0.0.0}-\${describe.distance}-\${commit.short}-SNAPSHOT"
+            version =
+                "\${describe.tag.version:-0.0.0}-\${describe.distance}-\${commit.short}-SNAPSHOT"
         }
-        tag("v(?<version>.*)") {
-            version = "\${ref.version}"
-        }
+        tag("v(?<version>.*)") { version = "\${ref.version}" }
     }
     rev {
         describeTagPattern = "v(?<version>.*)"
         version = "\${describe.tag.version:-0.0.0}-\${describe.distance}-\${commit.short}-SNAPSHOT"
+    }
+}
+
+spotless {
+    ratchetFrom("origin/main")
+
+    kotlinGradle {
+        encoding("UTF-8")
+        target("**/*.gradle.kts")
+        licenseHeader(
+            """
+            /*
+             * SPDX-FileCopyrightText:  Copyright ${"$"}YEAR Opencast Software Europe Ltd
+             * SPDX-License-Identifier: Apache-2.0
+             */
+             """
+                .trimIndent(),
+            "import"
+        )
+        ktfmt().kotlinlangStyle()
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
     }
 }
 
@@ -88,13 +116,15 @@ mavenPublishing {
             url.set("https://github.com/opencastsoftware/gradle-convention-plugins/issues")
         }
         scm {
-            connection.set("scm:git:https://github.com/opencastsoftware/gradle-convention-plugins.git")
-            developerConnection.set("scm:git:git@github.com:opencastsoftware/gradle-convention-plugins.git")
+            connection.set(
+                "scm:git:https://github.com/opencastsoftware/gradle-convention-plugins.git"
+            )
+            developerConnection.set(
+                "scm:git:git@github.com:opencastsoftware/gradle-convention-plugins.git"
+            )
             url.set("https://github.com/opencastsoftware/gradle-convention-plugins")
         }
     }
 }
 
-tasks.publish {
-    dependsOn("check")
-}
+tasks.publish { dependsOn("check") }
