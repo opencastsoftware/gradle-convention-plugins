@@ -1,7 +1,7 @@
 [versions]
 gradleMavenPublish = "0.24.0"
 gradleGitVersioning = "6.4.2"
-gradleVersions = "0.45.0"
+gradleVersions = "0.46.0"
 jacoco = "0.8.8"
 junit = "5.9.2"
 spotlessGradle = "6.17.0"
