@@ -25,14 +25,14 @@ version = "0.0.0-SNAPSHOT"
 gitVersioning.apply {
     refs {
         branch(".+") {
-            describeTagPattern = "v(?<version>.*)"
+            describeTagPattern = "v(?<version>.+)"
             version =
                 "\${describe.tag.version:-0.0.0}-\${describe.distance}-\${commit.short}-SNAPSHOT"
         }
-        tag("v(?<version>.*)") { version = "\${ref.version}" }
+        tag("v(?<version>.+)") { version = "\${ref.version}" }
     }
     rev {
-        describeTagPattern = "v(?<version>.*)"
+        describeTagPattern = "v(?<version>.+)"
         version = "\${describe.tag.version:-0.0.0}-\${describe.distance}-\${commit.short}-SNAPSHOT"
     }
 }
@@ -42,6 +42,7 @@ spotless {
 
     java {
         encoding("UTF-8")
+        targetExclude("build/**")
         licenseHeader(
             """
             /*
@@ -52,7 +53,7 @@ spotless {
                 .trimIndent()
         )
         removeUnusedImports()
-        importOrder("", "javax", "java", "\\#")
+        importOrder("", "javax|java", "\\#") // IntelliJ import order
         indentWithSpaces()
         trimTrailingWhitespace()
         endWithNewline()
@@ -60,7 +61,7 @@ spotless {
 
     kotlinGradle {
         encoding("UTF-8")
-        target("**/*.gradle.kts")
+        target("*.gradle.kts")
         ktfmt().kotlinlangStyle()
         indentWithSpaces()
         trimTrailingWhitespace()
@@ -80,7 +81,10 @@ mavenPublishing {
     }
 }
 
-tasks.withType<JavaCompile> { options.encoding = "UTF-8" }
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+    options.compilerArgs.add("-Xlint")
+}
 
 tasks.named<Test>("test") { useJUnitPlatform() }
 
