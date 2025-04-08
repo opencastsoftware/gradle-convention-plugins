@@ -4,7 +4,7 @@ gradleGitVersioning = "6.4.4"
 gradleVersions = "0.51.0"
 jacoco = "0.8.8"
 junit = "5.12.1"
-spotlessGradle = "7.0.2"
+spotlessGradle = "7.0.3"
 
 [libraries]
 gradleMavenPublishPlugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "gradleMavenPublish" }
