@@ -63,7 +63,7 @@ spotless {
 
 mavenPublishing {
     description = project.description
-    publishToMavenCentral(SonatypeHost.S01, true)
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
     signAllPublications()
     configure(GradlePlugin(javadocJar = JavadocJar.Empty(), sourcesJar = true))
     pomFromGradleProperties()
