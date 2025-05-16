@@ -54,7 +54,7 @@ spotless {
         )
         removeUnusedImports()
         importOrder("", "javax|java", "\\#") // IntelliJ import order
-        indentWithSpaces()
+        leadingTabsToSpaces()
         trimTrailingWhitespace()
         endWithNewline()
     }
@@ -63,7 +63,7 @@ spotless {
         encoding("UTF-8")
         target("*.gradle.kts")
         ktfmt().kotlinlangStyle()
-        indentWithSpaces()
+        leadingTabsToSpaces()
         trimTrailingWhitespace()
         endWithNewline()
     }
@@ -71,7 +71,7 @@ spotless {
 
 mavenPublishing {
     description = project.description
-    publishToMavenCentral(SonatypeHost.S01, true)
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
     signAllPublications()
     pom {
         organization {
