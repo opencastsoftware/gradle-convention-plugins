@@ -25,7 +25,7 @@ plugins {
 
 Gradle Kotlin DSL (build.gradle.kts):
 
-```
+```kotlin
 plugins {
   id("com.opencastsoftware.gradle.java-conventions") version "0.2.0"
 }
