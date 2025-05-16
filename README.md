@@ -31,7 +31,7 @@ plugins {
 }
 ```
 
-In practice, we typically use Gradle [version catalogs](https://docs.gradle.org/8.14/userguide/centralizing_dependencies.html#sub:using-catalogs) to declare our plugin dependencies:
+In practice, we typically use Gradle [version catalogs](https://docs.gradle.org/8.14/userguide/centralizing_dependencies.html#sub:using-catalogs) to declare our plugin dependencies.
 
 Version Catalog (gradle/libs.versions.toml):
 
