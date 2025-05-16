@@ -33,7 +33,7 @@ plugins {
 
 In practice, we typically use Gradle [version catalogs](https://docs.gradle.org/8.14/userguide/centralizing_dependencies.html#sub:using-catalogs) to declare our plugin dependencies:
 
-gradle/libs.versions.toml:
+Version Catalog (gradle/libs.versions.toml):
 
 ```toml
 [versions]
