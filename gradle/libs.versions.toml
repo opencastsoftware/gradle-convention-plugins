@@ -3,7 +3,7 @@ gradleMavenPublish = "0.32.0"
 gradleGitVersioning = "6.4.4"
 gradleVersions = "0.51.0"
 jacoco = "0.8.8"
-junit = "5.14.3"
+junit = "6.0.3"
 spotlessGradle = "7.2.1"
 
 [libraries]
