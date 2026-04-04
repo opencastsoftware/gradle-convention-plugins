@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/opencastsoftware/gradle-convention-plugins/actions/workflows/ci.yml/badge.svg)](https://github.com/opencastsoftware/gradle-convention-plugins/actions/workflows/ci.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.opencastsoftware.gradle/gradle-convention-plugins)](https://search.maven.org/search?q=g%3Acom.opencastsoftware.gradle+AND+a%3Agradle-convention-plugins)
+![Gradle Support](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fopencastsoftware%2Fgradle-convention-plugins%2Frefs%2Fheads%2Fmain%2Fgradle%2Fwrapper%2Fgradle-wrapper.properties&search=%2Fgradle-(.*)-bin.zip&replace=%241%2B&logo=gradle&label=Gradle)
 [![License](https://img.shields.io/github/license/opencastsoftware/gradle-convention-plugins?color=blue)](https://spdx.org/licenses/Apache-2.0.html)
 
 This project hosts convention plugins for Gradle projects at Opencast.
